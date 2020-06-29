@@ -125,3 +125,7 @@ select with a machine-wide installation of Jupyter notebooks.
     ```powershell
     del -force -recurse .\.venv
     ```
+
+## License
+
+This project is licensed under the [MIT license](LICENSE.txt).
