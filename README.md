@@ -62,3 +62,66 @@ You can install and run Jupyter from within a virtual environment:
    ```powershell
    deactivate
    ```
+
+6. If you are finished with the virtual environment and wish to reclaim space, simply delete the _.venv_ directory
+   (PowerShell sample):
+   ```powershell
+   del -force -recurse .\.venv
+   ```
+
+### Running Jupyter kernel from within virtual environment
+
+You can also create a separate Jupyter kernel using the virtual environment. This will appear as a kernel you can
+select with a machine-wide installation of Jupyter notebooks.
+
+1. Make sure you have Jupyter notebooks installed machine-wide:
+   ```powershell
+   pip install --upgrade notebook
+   ```
+
+2. Create your virtual environment and activate it (PowerShell activation sample):
+   ```powershell
+   virtualenv .venv
+   . .\.venv\Scripts\activate.ps1
+   ```
+
+3. Make sure python resolves to the virtual environment, and install required packages (PowerShell sample):
+   ```powershell
+   (get-command python).Source # should resolve to a directory under .venv
+   pip install -r requirements.txt
+   ```
+
+4. Add a new kernel into Jupyter with the name of the virtual environment you created above and make sure
+   it's registered by listing all the kernels you have installed:
+   ```powershell
+   python -m ipykernel install --user --name=.venv
+   jupter kernelspec list
+   ```
+
+5. Now you can start your machine-wide installation of Jupyter notebooks:
+   ```powershell
+   jupyter notebook --notebook-dir .
+   ```
+
+6. To use this new kernel:
+   1. Open a notebook
+   2. Click the **Kernel** menu
+   3. Hover over **Change kernel**
+   4. Select the virtual environment name you created above (e.g. `.venv`)
+
+7. When you have finished, you can click **Quit** from within Jupyter, or press `Ctrl+C` in the console you started above.
+
+8. To deactivate the virtual environment and restore global operations, simply type:
+   ```powershell
+   deactivate
+   ```
+
+9. To uninstall the new kernel you created:
+   ```powershell
+   jupyter kernelspec uninstall .venv
+   ```
+
+10. If you are finished with the virtual environment and wish to reclaim space, simply delete the _.venv_ directory (PowerShell sample):
+    ```powershell
+    del -force -recurse .\.venv
+    ```
